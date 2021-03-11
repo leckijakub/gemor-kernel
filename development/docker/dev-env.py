@@ -42,14 +42,16 @@ async def main():
     args = get_args()
     docker_opt = ""
     docker_client = docker.from_env()
-    volumes = {}
+    volumes = ""
     # parse volumes
     if args.volumes is not None:
         for vol in args.volumes:
-            volumes[f"{HOME_DIR}/{os.path.basename(vol)}"]={f"bind":vol,'mode':'rw'}
+            # volumes[f"{HOME_DIR}/{os.path.basename(vol)}"]={f"bind":vol,'mode':'rw'}
+            volumes += f"-v {os.path.dirname(os.path.realpath(vol))}:{HOME_DIR}/{os.path.basename(vol)}"
+        print(volumes)
     # get images name
     images = docker_client.images.list()
-    imagenames = set(functools.reduce(lambda x, y: x + y ,(img.tags for img in images)))
+    imagenames = set(functools.reduce(lambda x, y: x + y, (img.tags for img in images)))
     # look for target image
     if f"{IMAGE_NAME}:latest" not in imagenames:
         # build image
@@ -58,7 +60,7 @@ async def main():
         await building
         loading.cancel()
         print()
-    os.system(f"docker run --rm -it {IMAGE_NAME}")
+    os.system(f"docker run --rm {volumes} -it {IMAGE_NAME}")
 
 if __name__ == "__main__":
     asyncio.run(main())

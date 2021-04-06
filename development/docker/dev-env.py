@@ -12,8 +12,8 @@ from io import BytesIO
 import aiodocker
 
 SCRIPT_DIR = os.path.dirname(os.path.realpath(__file__))
-HOME_DIR = "/home/dev"
-IMAGE_NAME = "dev_env"
+MNT_DIR = "/mnt"
+IMAGE_NAME = "dev-env"
 CONTAINER_NAME = "dev-env-v1"
 
 
@@ -35,7 +35,7 @@ async def docker_build(dockerfile_path, tag):
 
 def get_args():
     parser = argparse.ArgumentParser(description="Script tor run gemor develop environment")
-    parser.add_argument("-v",dest="volumes", action='append', help="mount host volume into container under '/home/dev/'")
+    parser.add_argument("-v",dest="volumes", action='append', help=f"mount host volume into container under {MNT_DIR}'")
     return parser.parse_args()
 
 async def main():
@@ -46,8 +46,9 @@ async def main():
     # parse volumes
     if args.volumes is not None:
         for vol in args.volumes:
-            # volumes[f"{HOME_DIR}/{os.path.basename(vol)}"]={f"bind":vol,'mode':'rw'}
-            volumes += f"-v {os.path.dirname(os.path.realpath(vol))}:{HOME_DIR}/{os.path.basename(vol)}"
+            if vol[-1] == '/':
+                vol = vol[0:-1]
+            volumes += f"-v {os.path.realpath(vol)}:{MNT_DIR}/{os.path.basename(vol)}"
         print(volumes)
     # get images name
     images = docker_client.images.list()
@@ -60,7 +61,7 @@ async def main():
         await building
         loading.cancel()
         print()
-    os.system(f"docker run --rm {volumes} -it {IMAGE_NAME}")
+    os.system(f"docker run {volumes} --name {CONTAINER_NAME} -it --rm {IMAGE_NAME}")
 
 if __name__ == "__main__":
     asyncio.run(main())

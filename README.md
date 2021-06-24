@@ -29,3 +29,15 @@ at your option.
 Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
 dual licensed as above, without any additional terms or conditions.
+
+## Build
+
+### Docker environment
+A custom docker container is provided for Gemor kernel development. To build/run
+the docker container, run script `dev-env.py` under `development/docker`
+directory.
+
+```bash
+$ development/scripts/build-docker-image.sh
+$ development/scripts/enter-dev-env.sh
+```

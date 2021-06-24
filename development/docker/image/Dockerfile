@@ -1,7 +1,7 @@
 FROM debian:buster
 
-RUN apt update && apt upgrade -y && apt install -y build-essential git bison flex libgmp3-dev \
-                libmpc-dev libmpfr-dev texinfo wget
+RUN apt-get update && apt-get upgrade -y && apt install -y build-essential git \
+    bison flex libgmp3-dev libmpc-dev libmpfr-dev texinfo wget grub-common
 
 RUN useradd -d /home/dev -p dev -s /bin/bash -u 1000 -m dev
 

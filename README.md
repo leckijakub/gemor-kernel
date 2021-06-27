@@ -41,3 +41,23 @@ directory.
 $ development/scripts/build-docker-image.sh
 $ development/scripts/enter-dev-env.sh
 ```
+
+### Build the kernel
+
+Set up build environment variables by sourcing `src/build.env` file:
+```bash
+$ . build.env
+```
+
+Build the kernel using `make` command
+
+```bash
+$ make
+```
+
+## Running 
+
+To test the kernel use qemu emulation:
+```bash
+$ qemu-system-i386 -kernel gemor.kernel 
+```

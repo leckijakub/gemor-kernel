@@ -1,2 +1,7 @@
 /target
-/.vscode
+/build
+.vscode
+*.o
+*.bin
+*.iso
+*.kernel

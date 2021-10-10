@@ -5,3 +5,4 @@
 *.bin
 *.iso
 *.kernel
+Cargo.lock

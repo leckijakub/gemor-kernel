@@ -2,7 +2,7 @@
 name = "gemor-kernel"
 version = "0.1.0"
 authors = ["Jakub Lecki <lec.jakub@gmail.com>"]
-edition = "2018"
+edition = "2021"
 license = "MIT OR Apache-2.0"
 
 # the profile used for `cargo build`
@@ -13,5 +13,10 @@ panic = "abort" # disable stack unwinding on panic
 [profile.release]
 panic = "abort" # disable stack unwinding on panic
 
-[dependencies]
-bootloader = "0.9.8"
+[workspace]
+members = [
+    "simple_boot",
+]
+
+[dependencies.bootloader]
+version = "0.10.10"

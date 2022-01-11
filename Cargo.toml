@@ -18,6 +18,12 @@ members = [
     "simple_boot",
 ]
 
+[dependencies]
+conquer-once = { version = "0.2.1", default-features = false }
+spinning_top = { version = "0.2.1" }
+log = { version = "0.4.8" }
+rgb = { version = "0.8.31"}
+
 [dependencies.bootloader]
 version = "0.10.10"
 
@@ -25,3 +31,4 @@ version = "0.10.10"
 version = "0.3.1"
 default-features = false
 features = ["unicode"]
+

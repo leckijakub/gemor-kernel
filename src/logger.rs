@@ -37,7 +37,7 @@ impl log::Log for Logger {
             log::Level::Error => logger.set_color(RGB8{r: 225,g: 66,b: 66}),
             _ => logger.set_color(DEFAULT_COLOR)
         }
-        writeln!(logger, "{}:    {}", record.level(), record.args()).unwrap();
+        writeln!(logger, "{}: {}", record.level(), record.args()).unwrap();
         logger.add_vspace(LOG_SPACING);
     }
 

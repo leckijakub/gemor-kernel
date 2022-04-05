@@ -27,8 +27,10 @@ rgb = { version = "0.8.31" }
 [dependencies.bootloader]
 version = "0.10.10"
 
+[package.metadata.bootloader]
+map-physical-memory = true
+
 [dependencies.font8x8]
 version = "0.3.1"
 default-features = false
 features = ["unicode"]
-

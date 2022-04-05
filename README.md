@@ -2,7 +2,7 @@
 
 ## Introduction
 
-**Welcome to the Germor kernel repository!**
+**Welcome to the Gemor kernel repository!**
 
 This repository is intended to be my sandbox for diving into a kernel
 development along with Rust programming language.
